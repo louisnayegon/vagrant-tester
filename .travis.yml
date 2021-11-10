@@ -9,11 +9,11 @@ cache:
 
 install:
 # Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
-- sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev
+- sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev virtualbox
 
 # Download Vagrant & Install Vagrant package
-- sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.deb
-- sudo dpkg -i vagrant_2.2.14_x86_64.deb
+- sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.deb
+- sudo dpkg -i vagrant_2.2.19_x86_64.deb
 
 # Vagrant correctly installed?
 - vagrant --version
@@ -22,5 +22,5 @@ install:
 - sudo vagrant plugin install vagrant-libvirt
 
 script:
-- sudo vagrant up --provider=libvirt
+- sudo vagrant up
 - sudo vagrant ssh -c "echo 'hello world!'"
