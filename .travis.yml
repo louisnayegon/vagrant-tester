@@ -33,8 +33,8 @@ install:
 - vagrant --version
 
 # Install vagrant-libvirt Vagrant plugin
-- sudo vagrant plugin install vagrant-libvirt
 - sudo vagrant plugin install libvirt
+- sudo vagrant plugin install vagrant-libvirt
 
 script:
 - sudo vagrant up
