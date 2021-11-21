@@ -12,9 +12,10 @@ addons:
       - nuget
 env:
   global:
-    - ASPNETCORE_ENVIRONMENT=Development
-    - DOTNET_PRINT_TELEMETRY_MESSAGE=false
-    - DOTNET_CLI_TELEMETRY_OPTOUT=true
+    - ASPNETCORE_ENVIRONMENT: Development
+    - DOTNET_PRINT_TELEMETRY_MESSAGE: false
+    - DOTNET_CLI_TELEMETRY_OPTOUT: true
+    - VAGRANT_DEFAULT_PROVIDER: libvirt
 
 # Cache the big Vagrant boxes
 cache:
@@ -22,20 +23,14 @@ cache:
   - /home/travis/.vagrant.d/boxes
 
 install:
-# Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
-- sudo apt upgrade && sudo apt update && sudo apt install -y qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils virt-manager
-
-# Download Vagrant & Install Vagrant package
-- sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.deb
-- sudo dpkg -i vagrant_2.2.19_x86_64.deb
-
-# Vagrant correctly installed?
-- vagrant --version
-
-# Install vagrant-libvirt Vagrant plugin
-- sudo vagrant plugin install libvirt
-- sudo vagrant plugin install vagrant-libvirt
+  - |
+    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+    sudo apt-get update && sudo apt-get install vagrant
+    sudo apt-get install -y build-essential qemu-kvm qemu-utils libvirt-dev libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager dnsmasq
+    sudo vagrant plugin install vagrant-libvirt
+  - vagrant --version
 
 script:
-- sudo vagrant up
-- sudo vagrant ssh -c "echo 'hello world!'"
+  - sudo vagrant up
+  - sudo vagrant ssh -c "echo 'hello world!'"
