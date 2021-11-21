@@ -1,5 +1,5 @@
 ---
-dist: bionic
+dist: focal
 language: python
 
 # Cache the big Vagrant boxes
@@ -9,7 +9,7 @@ cache:
 
 install:
 # Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
-- sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev virtualbox
+- sudo apt upgrade && sudo apt update && sudo apt install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev virtualbox
 
 # Download Vagrant & Install Vagrant package
 - sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.deb
