@@ -23,7 +23,7 @@ cache:
 
 install:
 # Install libvrt & KVM (see https://github.com/alvistack/ansible-role-virtualbox/blob/master/.travis.yml)
-- sudo apt upgrade && sudo apt update && sudo apt install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev virtualbox
+- sudo apt upgrade && sudo apt update && sudo apt install -y qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils virt-manager
 
 # Download Vagrant & Install Vagrant package
 - sudo wget -nv https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.deb
