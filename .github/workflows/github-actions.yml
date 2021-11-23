@@ -11,8 +11,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
       - run: npm install -g bats
       - run: bats -v
       - run: node --version
       - run: yarn --version
       - run: dotnet --version
+      - run: vagrant --version          
