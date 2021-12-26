@@ -27,6 +27,3 @@ jobs:
       - run: yarn --version
       - run: dotnet --version
       - run: vagrant --version
-      - run: sudo vagrant up
-      - run: sudo vagrant ssh -c "echo 'hello world!'"
-      - run: sudo vagrant destroy -f
